@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Admin Panel</title>
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body>
+<h2>Hien thi người dùng</h2>
+<div>
+    <h2 class="text-2xl font-semibold mb-4">Danh sách người dùng</h2>
+    <table class="table-auto w-full border">
+        <thead>
+        <tr class="bg-gray-100">
+            <th class="border px-4 py-2">Id</th>
+            <th class="border px-4 py-2">first name</th>
+            <th class="border px-4 py-2"> last name</th>
+            <th class="border px-4 py-2"> address</th>
+            <th class="border px-4 py-2"> Image</th>
+            <th class="border px-4 py-2">phone</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="customer : ${customer}">
+            <td class="border px-4 py-2" th:text="${customer.id}"></td>
+            <td class="border px-4 py-2" th:text="${customer.firstName}"></td>
+            <td class="border px-4 py-2" th:text="${customer.lastName}"></td>
+            <td class="border px-4 py-2" th:text="${customer.address}"></td>
+            <td class="border px-4 py-2">
+                <img width="100" height="100" th:src="${customer.image}" alt="">
+            </td>
+            <td class="border px-4 py-2" th:text="${customer.phoneNumber}"></td>
+
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
