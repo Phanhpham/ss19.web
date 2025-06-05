@@ -22,16 +22,16 @@ public class CustomerRepoImp implements CustomerRepo {
         return query.getResultList();
     }
 
-    @Override
-    public void addCustomer(Customer customer) {
-        Session session = sessionFactory.openSession();
-        Transaction tx = null;
-        try {
-            tx = session.beginTransaction();
-            session.save(customer);
-            tx.commit();
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-    }
+//    @Override
+//    public void addCustomer(Customer customer) {
+//        Session session = sessionFactory.openSession();
+//        Transaction tx = null;
+//        try {
+//            tx = session.beginTransaction();
+//            session.save(customer);
+//            tx.commit();
+//        }catch(Exception e){
+//            e.printStackTrace();
+//        }
+//    }
 }

@@ -16,8 +16,8 @@ public class CustomerServiceImp implements CustomerService{
         return customerRepo.getAll();
     }
 
-    @Override
-    public boolean addCustomer(Customer customer) {
-        return customerRepo.addCustomer(customer);
-    }
+//    @Override
+//    public boolean addCustomer(Customer customer) {
+////        return customerRepo.addCustomer(customer);
+//    }
 }

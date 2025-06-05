@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Admin Panel</title>
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body>
+<h2>Hien thi người dùng</h2>
+<div>
+    <h2 class="text-2xl font-semibold mb-4">Danh sách người dùng</h2>
+    <table class="table-auto w-full border">
+        <thead>
+        <tr class="bg-gray-100">
+            <th class="border px-4 py-2">Id</th>
+            <th class="border px-4 py-2">Username</th>
+            <th class="border px-4 py-2"> Email</th>
+            <th class="border px-4 py-2">PhoneNumber</th>
+            <th class="border px-4 py-2">Trang thai</th>
+            <th class="border px-4 py-2">Chuc nang</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user : ${user}">
+            <td class="border px-4 py-2" th:text="${user.id}"></td>
+            <td class="border px-4 py-2" th:text="${user.userName}"></td>
+            <td class="border px-4 py-2" th:text="${user.email}"></td>
+            <td class="border px-4 py-2" th:text="${user.phoneNumber}"></td>
+            <td class="border px-4 py-2" th:text="${user.isActive}"></td>
+            <td class="border px-4 py-2 flex space-x-2 justify-center">
+                <a th:if="${user.isActive.name() == 'ACTIVE'}"
+                   th:href="@{'/users/block/' + ${user.id}}"
+                   class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600">Block</a>
+
+                <a th:if="${user.isActive.name() == 'BLOCK'}"
+                   th:href="@{'/users/unblock/' + ${user.id}}"
+                   class="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600">Unblock</a>
+            </td>
+        </tr>
+        </tbody>
+
+
+    </table>
+    <div class="mt-12 flex justify-center space-x-2">
+        <a th:if="${currentPage > 1}"
+           th:href="@{'/page'(page=${currentPage - 1}, size=${5})}"
+           class="px-3 py-1 border rounded bg-gray-200 hover:bg-gray-300">Trước</a>
+
+        <span th:each="i : ${#numbers.sequence(1, totalPages)}">
+        <a th:href="@{'/page'(page=${i}, size=${5})}"
+           th:text="${i}"
+           th:classappend="${i == currentPage} ? 'bg-blue-500 text-white' : 'bg-gray-200 hover:bg-gray-300'"
+           class="px-3 py-1 border rounded mx-1"></a>
+    </span>
+
+        <a th:if="${currentPage < totalPages}"
+           th:href="@{'/page'(page=${currentPage + 1}, size=${5})}"
+           class="px-3 py-1 border rounded bg-gray-200 hover:bg-gray-300">Sau</a>
+    </div>
+</div>
+</body>
+</html>

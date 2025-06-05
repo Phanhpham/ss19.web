@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface CustomerRepo {
     List<Customer> getAll();
-    void addCustomer(Customer customer);
+//    void addCustomer(Customer customer);
 }

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Movie Panel</title>
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body>
+<h2 class="text-2xl font-semibold mb-4">Danh sách phim</h2>
+
+<div>
+    <a href="addMovie"
+       class="inline-block bg-blue-500 text-white font-semibold px-4 py-2 rounded hover:bg-blue-600 transition duration-300">
+        + Thêm phim
+    </a>
+    <table class="table-auto w-full border">
+        <thead>
+        <tr class="bg-gray-100">
+            <th class="border px-4 py-2">Id</th>
+            <th class="border px-4 py-2">Tên phim</th>
+            <th class="border px-4 py-2">Đạo diễn</th>
+            <th class="border px-4 py-2">Năm phát hành</th>
+            <th class="border px-4 py-2">Thể loại</th>
+            <th class="border px-4 py-2">Thời lượng (phút)</th>
+            <th class="border px-4 py-2">Ngôn ngữ</th>
+            <th class="border px-4 py-2">Poster</th>
+            <th class="border px-4 py-2">Trạng thái</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="movie : ${movie}">
+            <td class="border px-4 py-2" th:text="${movie.id}"></td>
+            <td class="border px-4 py-2" th:text="${movie.title}"></td>
+            <td class="border px-4 py-2" th:text="${movie.director}"></td>
+            <td class="border px-4 py-2" th:text="${movie.releaseYear}"></td>
+            <td class="border px-4 py-2" th:text="${movie.genre}"></td>
+            <td class="border px-4 py-2" th:text="${movie.duration}"></td>
+            <td class="border px-4 py-2" th:text="${movie.language}"></td>
+            <td class="border px-4 py-2">
+                <img th:src="${movie.poster}" alt="Poster" class="h-16 mx-auto"/>
+            </td>
+            <td class="border px-4 py-2" th:text="${movie.status ? 'Đang chiếu' : 'Ngưng chiếu'}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <!-- Pagination -->
+    <div class="mt-12 flex justify-center space-x-2">
+        <a th:if="${currentPage > 1}"
+           th:href="@{'/pageMovie'(page=${currentPage - 1}, size=${5})}"
+           class="px-3 py-1 border rounded bg-gray-200 hover:bg-gray-300">Trước</a>
+
+        <span th:each="i : ${#numbers.sequence(1, totalPages)}">
+            <a th:href="@{'/pageMovie'(page=${i}, size=${5})}"
+               th:text="${i}"
+               th:classappend="${i == currentPage} ? 'bg-blue-500 text-white' : 'bg-gray-200 hover:bg-gray-300'"
+               class="px-3 py-1 border rounded mx-1"></a>
+        </span>
+
+        <a th:if="${currentPage < totalPages}"
+           th:href="@{'/pageMovie'(page=${currentPage + 1}, size=${5})}"
+           class="px-3 py-1 border rounded bg-gray-200 hover:bg-gray-300">Sau</a>
+    </div>
+</div>
+</body>
+</html>

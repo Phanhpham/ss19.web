@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Thêm phim</title>
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="p-8">
+<h2 class="text-2xl font-bold mb-4">Thêm phim mới</h2>
+<form th:action="@{/addMovie}" th:object="${movie}" method="post" enctype="multipart/form-data" class="space-y-4">
+    <div>
+        <label>Tên phim</label>
+        <input th:field="*{title}" class="border rounded p-2 w-full"/>
+        <p th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="text-red-500 text-sm"></p>
+    </div>
+
+    <div>
+        <label>Đạo diễn</label>
+        <input th:field="*{director}" class="border rounded p-2 w-full"/>
+        <p th:if="${#fields.hasErrors('director')}" th:errors="*{director}" class="text-red-500 text-sm"></p>
+    </div>
+
+    <div>
+        <label>Năm phát hành</label>
+        <input th:field="*{releaseYear}" type="number" class="border rounded p-2 w-full"/>
+        <p th:if="${#fields.hasErrors('releaseYear')}" th:errors="*{releaseYear}" class="text-red-500 text-sm"></p>
+    </div>
+
+    <div>
+        <label>Thể loại</label>
+        <input th:field="*{genre}" class="border rounded p-2 w-full"/>
+        <p th:if="${#fields.hasErrors('genre')}" th:errors="*{genre}" class="text-red-500 text-sm"></p>
+    </div>
+
+    <div>
+        <label>Thời lượng (phút)</label>
+        <input th:field="*{duration}" type="number" class="border rounded p-2 w-full"/>
+        <p th:if="${#fields.hasErrors('duration')}" th:errors="*{duration}" class="text-red-500 text-sm"></p>
+    </div>
+
+    <div>
+        <label>Ngôn ngữ</label>
+        <input th:field="*{language}" class="border rounded p-2 w-full"/>
+        <p th:if="${#fields.hasErrors('language')}" th:errors="*{language}" class="text-red-500 text-sm"></p>
+    </div>
+
+    <div>
+        <label>Ảnh poster</label>
+        <input type="file" name="image" class="border p-2"/>
+        <p th:if="${error}" th:text="${error}" class="text-red-500 text-sm"></p>
+    </div>
+
+    <div>
+        <label>
+            <input type="checkbox" th:field="*{status}"/>
+            Đang chiếu
+        </label>
+    </div>
+
+    <button type="submit"
+            class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition">
+        Lưu
+    </button>
+</form>
+
+</body>
+</html>

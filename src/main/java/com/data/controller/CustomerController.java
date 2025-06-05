@@ -24,6 +24,7 @@ public class CustomerController {
     @GetMapping("addCustomer")
     public String showFormAdd(Model model){
         Customer customer = new Customer();
-        model.addAttribute("customer",)
+        model.addAttribute("customer");
+        return "customer";
     }
 }
